@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="SafeStep empowers pedestrians to walk confidently at night with data-driven navigation that prioritizes safety over speed">
+    <meta name="theme-color" content="#6C63FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SafeStep">
+    
+    <title>SafeStep - Walk Confidently at Night</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👟</text></svg>">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <i class="fas fa-shoe-prints"></i>
+                <span>SafeStep</span>
+            </div>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+            <p class="splash-tagline">Walk Confidently at Night</p>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="menu-btn" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="header-center">
+                <div class="logo">
+                    <i class="fas fa-shoe-prints"></i>
+                    <span>SafeStep</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="notification-btn" id="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="profile-avatar" id="profile-trigger">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=SafeUser" alt="Profile">
+                </div>
+            </div>
+        </header>
+
+        <!-- Side Menu -->
+        <nav class="side-menu" id="side-menu">
+            <div class="menu-header">
+                <div class="menu-profile">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=SafeUser" alt="Profile">
+                    <div class="menu-profile-info">
+                        <h3>Alex Johnson</h3>
+                        <span class="safety-score"><i class="fas fa-shield-alt"></i> Safety Score: 92</span>
+                    </div>
+                </div>
+            </div>
+            <ul class="menu-items">
+                <li class="menu-item active" data-page="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </li>
+                <li class="menu-item" data-page="navigate">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Navigate</span>
+                </li>
+                <li class="menu-item" data-page="community">
+                    <i class="fas fa-users"></i>
+                    <span>Community</span>
+                </li>
+                <li class="menu-item" data-page="chat">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat</span>
+                </li>
+                <li class="menu-item" data-page="volunteer">
+                    <i class="fas fa-hands-helping"></i>
+                    <span>SafeWalk Volunteers</span>
+                </li>
+                <li class="menu-item" data-page="report">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Report Incident</span>
+                </li>
+                <li class="menu-item" data-page="emergency">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Emergency</span>
+                </li>
+                <li class="menu-item" data-page="profile">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profile & Settings</span>
+                </li>
+            </ul>
+            <div class="menu-footer">
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menu-overlay"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <section class="page active" id="page-home">
+                <div class="home-hero">
+                    <div class="hero-content">
+                        <h1>Walk <span class="gradient-text">Safely</span> Tonight</h1>
+                        <p>Data-driven navigation that prioritizes your safety over speed</p>
+                        <button class="cta-btn pulse" onclick="navigateTo('navigate')">
+                            <i class="fas fa-route"></i>
+                            Start Safe Route
+                        </button>
+                    </div>
+                    <div class="hero-illustration">
+                        <div class="floating-icons">
+                            <div class="float-icon" style="--delay: 0s"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="float-icon" style="--delay: 0.5s"><i class="fas fa-lightbulb"></i></div>
+                            <div class="float-icon" style="--delay: 1s"><i class="fas fa-shield-alt"></i></div>
+                            <div class="float-icon" style="--delay: 1.5s"><i class="fas fa-users"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="action-grid">
+                        <button class="action-card" onclick="navigateTo('navigate')">
+                            <div class="action-icon gradient-bg">
+                                <i class="fas fa-walking"></i>
+                            </div>
+                            <span>Navigate</span>
+                        </button>
+                        <button class="action-card" onclick="navigateTo('volunteer')">
+                            <div class="action-icon gradient-bg-2">
+                                <i class="fas fa-user-friends"></i>
+                            </div>
+                            <span>Request Walker</span>
+                        </button>
+                        <button class="action-card" onclick="navigateTo('report')">
+                            <div class="action-icon gradient-bg-3">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <span>Report</span>
+                        </button>
+                        <button class="action-card emergency-action" onclick="triggerEmergency()">
+                            <div class="action-icon emergency-bg">
+                                <i class="fas fa-exclamation"></i>
+                            </div>
+                            <span>SOS</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Safety Overview -->
+                <div class="safety-overview">
+                    <h2 class="section-title">Your Area Tonight</h2>
+                    <div class="safety-card">
+                        <div class="safety-header">
+                            <div class="safety-score-display">
+                                <div class="score-circle">
+                                    <svg viewBox="0 0 100 100">
+                                        <circle cx="50" cy="50" r="45" class="score-bg"/>
+                                        <circle cx="50" cy="50" r="45" class="score-progress" style="--progress: 78"/>
+                                    </svg>
+                                    <span class="score-value">78</span>
+                                </div>
+                                <span class="score-label">Safety Score</span>
+                            </div>
+                            <div class="safety-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Good Lighting</span>
+                                    <span class="status good">92%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>Foot Traffic</span>
+                                    <span class="status medium">Medium</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-video"></i>
+                                    <span>CCTV Coverage</span>
+                                    <span class="status good">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Activity Feed -->
+                <div class="live-feed">
+                    <div class="feed-header">
+                        <h2 class="section-title">
+                            <span class="live-dot"></span>
+                            Community Updates
+                        </h2>
+                        <button class="see-all-btn" onclick="navigateTo('community')">See All</button>
+                    </div>
+                    <div class="feed-list">
+                        <div class="feed-item">
+                            <div class="feed-icon warning">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="feed-content">
+                                <p><strong>Street light out</strong> reported on Oak Street</p>
+                                <span class="feed-time">5 mins ago</span>
+                            </div>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="feed-content">
+                                <p><strong>SafeWalk completed</strong> - Maria walked Sarah home</p>
+                                <span class="feed-time">12 mins ago</span>
+                            </div>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon info">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="feed-content">
+                                <p><strong>Campus event ending</strong> at 10 PM - expect more walkers</p>
+                                <span class="feed-time">30 mins ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Section -->
+                <div class="features-section">
+                    <h2 class="section-title">How SafeStep Protects You</h2>
+                    <div class="features-carousel">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3>AI-Powered Routes</h3>
+                            <p>Our AI analyzes real-time data to find the safest path</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-city"></i>
+                            </div>
+                            <h3>City IoT Data</h3>
+                            <p>Connected to street lights, cameras, and sensors</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-crowd"></i>
+                            </div>
+                            <h3>Crowdsourced Intel</h3>
+                            <p>Community reports keep everyone informed</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-watch"></i>
+                            </div>
+                            <h3>Smartwatch Ready</h3>
+                            <p>Get haptic alerts on your wearable device</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Page -->
+            <section class="page" id="page-navigate">
+                <div class="navigate-container">
+                    <div class="search-panel">
+                        <div class="search-box">
+                            <div class="search-input-group">
+                                <i class="fas fa-circle current-location"></i>
+                                <input type="text" placeholder="Current Location" id="start-location" value="My Location">
+                            </div>
+                            <div class="search-divider">
+                                <span class="swap-btn"><i class="fas fa-exchange-alt"></i></span>
+                            </div>
+                            <div class="search-input-group">
+                                <i class="fas fa-map-marker-alt destination"></i>
+                                <input type="text" placeholder="Where to?" id="end-location">
+                            </div>
+                        </div>
+                        <div class="route-options">
+                            <button class="route-option active" data-type="safest">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Safest</span>
+                            </button>
+                            <button class="route-option" data-type="balanced">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Balanced</span>
+                            </button>
+                            <button class="route-option" data-type="fastest">
+                                <i class="fas fa-bolt"></i>
+                                <span>Fastest</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container" id="map">
+                        <div class="map-placeholder">
+                            <div class="map-graphic">
+                                <div class="map-grid"></div>
+                                <div class="route-line safest"></div>
+                                <div class="route-line fastest"></div>
+                                <div class="map-marker start"><i class="fas fa-circle"></i></div>
+                                <div class="map-marker end"><i class="fas fa-map-marker-alt"></i></div>
+                                <div class="safety-zone zone-1"></div>
+                                <div class="safety-zone zone-2"></div>
+                                <div class="safety-zone zone-3"></div>
+                            </div>
+                            <div class="map-legend">
+                                <span class="legend-item safe"><i class="fas fa-circle"></i> Safe Zone</span>
+                                <span class="legend-item caution"><i class="fas fa-circle"></i> Caution</span>
+                                <span class="legend-item avoid"><i class="fas fa-circle"></i> Avoid</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="route-details hidden" id="route-details">
+                        <div class="route-header">
+                            <div class="route-info">
+                                <h3>Safest Route</h3>
+                                <div class="route-stats">
+                                    <span><i class="fas fa-clock"></i> 12 min</span>
+                                    <span><i class="fas fa-walking"></i> 0.8 mi</span>
+                                    <span class="safety-badge"><i class="fas fa-shield-alt"></i> 94%</span>
+                                </div>
+                            </div>
+                            <button class="start-nav-btn">
+                                <i class="fas fa-play"></i>
+                                Start
+                            </button>
+                        </div>
+                        <div class="route-highlights">
+                            <div class="highlight good">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Well-lit path</span>
+                            </div>
+                            <div class="highlight good">
+                                <i class="fas fa-video"></i>
+                                <span>CCTV monitored</span>
+                            </div>
+                            <div class="highlight good">
+                                <i class="fas fa-users"></i>
+                                <span>High foot traffic</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-places">
+                        <h3>Recent Places</h3>
+                        <div class="places-list">
+                            <button class="place-item" onclick="setDestination('Library')">
+                                <i class="fas fa-book"></i>
+                                <span>University Library</span>
+                            </button>
+                            <button class="place-item" onclick="setDestination('Dorm')">
+                                <i class="fas fa-home"></i>
+                                <span>North Residence Hall</span>
+                            </button>
+                            <button class="place-item" onclick="setDestination('Gym')">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Recreation Center</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Page -->
+            <section class="page" id="page-community">
+                <div class="community-container">
+                    <div class="community-header">
+                        <h1>Community Hub</h1>
+                        <p>Stay informed, stay safe together</p>
+                    </div>
+
+                    <div class="community-tabs">
+                        <button class="tab-btn active" data-tab="feed">Feed</button>
+                        <button class="tab-btn" data-tab="reports">Reports</button>
+                        <button class="tab-btn" data-tab="leaderboard">Top Helpers</button>
+                    </div>
+
+                    <div class="tab-content active" id="tab-feed">
+                        <div class="create-post">
+                            <div class="post-avatar">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=SafeUser" alt="You">
+                            </div>
+                            <input type="text" placeholder="Share a safety tip or update..." class="post-input">
+                            <button class="post-btn"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+
+                        <div class="posts-feed">
+                            <article class="post-card">
+                                <div class="post-header">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maria" alt="Maria">
+                                    <div class="post-meta">
+                                        <h4>Maria Chen <span class="verified"><i class="fas fa-check-circle"></i></span></h4>
+                                        <span class="post-time">15 minutes ago</span>
+                                    </div>
+                                    <span class="post-badge volunteer">Volunteer</span>
+                                </div>
+                                <div class="post-body">
+                                    <p>Just finished my 50th SafeWalk! 🎉 Remember, you're never alone when walking at night. Request a walker anytime!</p>
+                                </div>
+                                <div class="post-actions">
+                                    <button class="action-btn"><i class="fas fa-heart"></i> 24</button>
+                                    <button class="action-btn"><i class="fas fa-comment"></i> 8</button>
+                                    <button class="action-btn"><i class="fas fa-share"></i></button>
+                                </div>
+                            </article>
+
+                            <article class="post-card alert-post">
+                                <div class="post-header">
+                                    <div class="alert-icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="post-meta">
+                                        <h4>Community Alert</h4>
+                                        <span class="post-time">1 hour ago</span>
+                                    </div>
+                                    <span class="post-badge alert">Alert</span>
+                                </div>
+                                <div class="post-body">
+                                    <p>⚠️ Multiple reports of poor lighting on Elm Street near the park. City has been notified. Use alternate route via Main St.</p>
+                                    <div class="alert-map-preview">
+                                        <div class="mini-map">
+                                            <i class="fas fa-map-marked-alt"></i>
+                                            <span>View on Map</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="post-actions">
+                                    <button class="action-btn"><i class="fas fa-check"></i> Confirm</button>
+                                    <button class="action-btn"><i class="fas fa-times"></i> Resolved</button>
+                                    <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                                </div>
+                            </article>
+
+                            <article class="post-card">
+                                <div class="post-header">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=James" alt="James">
+                                    <div class="post-meta">
+                                        <h4>James Wilson</h4>
+                                        <span class="post-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="post-body">
+                                    <p>Pro tip: The path behind the Science building has new emergency phones installed every 100ft. Super safe now! 💪</p>
+                                </div>
+                                <div class="post-actions">
+                                    <button class="action-btn liked"><i class="fas fa-heart"></i> 45</button>
+                                    <button class="action-btn"><i class="fas fa-comment"></i> 12</button>
+                                    <button class="action-btn"><i class="fas fa-share"></i></button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-reports">
+                        <div class="reports-map">
+                            <div class="map-placeholder small">
+                                <div class="report-pins">
+                                    <div class="report-pin warning" style="top: 30%; left: 40%">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <div class="report-pin danger" style="top: 60%; left: 70%">
+                                        <i class="fas fa-exclamation"></i>
+                                    </div>
+                                    <div class="report-pin info" style="top: 45%; left: 25%">
+                                        <i class="fas fa-info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reports-list">
+                            <div class="report-item warning">
+                                <div class="report-icon"><i class="fas fa-lightbulb"></i></div>
+                                <div class="report-info">
+                                    <h4>Street Light Out</h4>
+                                    <p>Oak Street near campus entrance</p>
+                                    <span class="report-meta">5 confirmations • 2 hours ago</span>
+                                </div>
+                                <button class="confirm-btn">Confirm</button>
+                            </div>
+                            <div class="report-item danger">
+                                <div class="report-icon"><i class="fas fa-road"></i></div>
+                                <div class="report-info">
+                                    <h4>Unsafe Area</h4>
+                                    <p>Alley behind parking lot B</p>
+                                    <span class="report-meta">12 confirmations • 5 hours ago</span>
+                                </div>
+                                <button class="confirm-btn">Confirm</button>
+                            </div>
+                            <div class="report-item info">
+                                <div class="report-icon"><i class="fas fa-construction"></i></div>
+                                <div class="report-info">
+                                    <h4>Construction Zone</h4>
+                                    <p>Main St sidewalk closed</p>
+                                    <span class="report-meta">8 confirmations • 1 day ago</span>
+                                </div>
+                                <button class="confirm-btn">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-leaderboard">
+                        <div class="leaderboard">
+                            <div class="leaderboard-podium">
+                                <div class="podium-item second">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="Sarah">
+                                    <span class="rank">2</span>
+                                    <h4>Sarah K.</h4>
+                                    <p>89 walks</p>
+                                </div>
+                                <div class="podium-item first">
+                                    <div class="crown"><i class="fas fa-crown"></i></div>
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maria" alt="Maria">
+                                    <span class="rank">1</span>
+                                    <h4>Maria C.</h4>
+                                    <p>124 walks</p>
+                                </div>
+                                <div class="podium-item third">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=David" alt="David">
+                                    <span class="rank">3</span>
+                                    <h4>David M.</h4>
+                                    <p>76 walks</p>
+                                </div>
+                            </div>
+                            <div class="leaderboard-list">
+                                <div class="leaderboard-item">
+                                    <span class="rank">4</span>
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Emily" alt="Emily">
+                                    <span class="name">Emily R.</span>
+                                    <span class="walks">62 walks</span>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <span class="rank">5</span>
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Michael" alt="Michael">
+                                    <span class="name">Michael T.</span>
+                                    <span class="walks">58 walks</span>
+                                </div>
+                                <div class="leaderboard-item you">
+                                    <span class="rank">23</span>
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=SafeUser" alt="You">
+                                    <span class="name">You</span>
+                                    <span class="walks">12 walks</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Page -->
+            <section class="page" id="page-chat">
+                <div class="chat-container">
+                    <div class="chat-list" id="chat-list">
+                        <div class="chat-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search conversations...">
+                        </div>
+                        <div class="chat-categories">
+                            <button class="category-btn active">All</button>
+                            <button class="category-btn">Walkers</button>
+                            <button class="category-btn">Groups</button>
+                        </div>
+                        <div class="conversations">
+                            <div class="conversation-item active" onclick="openChat('maria')">
+                                <div class="conv-avatar online">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maria" alt="Maria">
+                                </div>
+                                <div class="conv-info">
+                                    <h4>Maria Chen</h4>
+                                    <p>On my way! See you in 5 mins 👋</p>
+                                </div>
+                                <div class="conv-meta">
+                                    <span class="time">2m</span>
+                                    <span class="unread">2</span>
+                                </div>
+                            </div>
+                            <div class="conversation-item" onclick="openChat('group')">
+                                <div class="conv-avatar group">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="conv-info">
+                                    <h4>SafeWalk Volunteers</h4>
+                                    <p>David: Anyone available near library?</p>
+                                </div>
+                                <div class="conv-meta">
+                                    <span class="time">15m</span>
+                                </div>
+                            </div>
+                            <div class="conversation-item" onclick="openChat('sarah')">
+                                <div class="conv-avatar online">
+                                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="Sarah">
+                                </div>
+                                <div class="conv-info">
+                                    <h4>Sarah Kim</h4>
+                                    <p>Thanks for walking with me!</p>
+                                </div>
+                                <div class="conv-meta">
+                                    <span class="time">1h</span>
+                                </div>
+                            </div>
+                            <div class="conversation-item" onclick="openChat('campus')">
+                                <div class="conv-avatar group">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="conv-info">
+                                    <h4>Campus Safety Updates</h4>
+                                    <p>New lighting installed on West path</p>
+                                </div>
+                                <div class="conv-meta">
+                                    <span class="time">3h</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-window" id="chat-window">
+                        <div class="chat-header">
+                            <button class="back-btn" onclick="closeChat()">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <div class="chat-user-info">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maria" alt="Maria">
+                                <div>
+                                    <h4>Maria Chen</h4>
+                                    <span class="status online">Online • Verified Walker</span>
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <button class="chat-action-btn"><i class="fas fa-phone"></i></button>
+                                <button class="chat-action-btn"><i class="fas fa-map-marker-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message-date">Today</div>
+                            <div class="message received">
+                                <p>Hey! I accepted your SafeWalk request 😊</p>
+                                <span class="time">8:32 PM</span>
+                            </div>
+                            <div class="message sent">
+                                <p>Thank you so much! I'm at the library entrance</p>
+                                <span class="time">8:33 PM</span>
+                            </div>
+                            <div class="message received">
+                                <p>Perfect! I'm about 5 minutes away. I'm wearing a blue jacket</p>
+                                <span class="time">8:34 PM</span>
+                            </div>
+                            <div class="message received location">
+                                <div class="location-preview">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <span>Maria's Location</span>
+                                        <small>Updated just now</small>
+                                    </div>
+                                </div>
+                                <span class="time">8:35 PM</span>
+                            </div>
+                            <div class="message sent">
+                                <p>Great, I'll wait right here! 👋</p>
+                                <span class="time">8:35 PM</span>
+                            </div>
+                            <div class="message received">
+                                <p>On my way! See you in 5 mins 👋</p>
+                                <span class="time">8:36 PM</span>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <button class="attachment-btn"><i class="fas fa-plus"></i></button>
+                            <input type="text" placeholder="Type a message..." id="message-input">
+                            <button class="location-share-btn"><i class="fas fa-map-marker-alt"></i></button>
+                            <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Volunteer Page -->
+            <section class="page" id="page-volunteer">
+                <div class="volunteer-container">
+                    <div class="volunteer-header">
+                        <h1>SafeWalk <span class="gradient-text">Volunteers</span></h1>
+                        <p>Request a companion or become a volunteer walker</p>
+                    </div>
+
+                    <div class="volunteer-toggle">
+                        <button class="toggle-btn active" id="request-toggle">Request Walker</button>
+                        <button class="toggle-btn" id="volunteer-toggle">Become Volunteer</button>
+                    </div>
+
+                    <!-- Request Walker Section -->
+                    <div class="volunteer-section active" id="request-section">
+                        <div class="request-form">
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> Pickup Location</label>
+                                <input type="text" placeholder="Where are you?" value="University Library">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-flag-checkered"></i> Destination</label>
+                                <input type="text" placeholder="Where to?">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-clock"></i> When</label>
+                                <div class="time-options">
+                                    <button class="time-btn active">Now</button>
+                                    <button class="time-btn">15 min</button>
+                                    <button class="time-btn">30 min</button>
+                                    <button class="time-btn">Schedule</button>
+                                </div>
+                            </div>
+                            <button class="request-btn pulse">
+                                <i class="fas fa-user-friends"></i>
+                                Request SafeWalker
+                            </button>
+                        </div>
+
+                        <div class="available-walkers">
+                            <h3>Available Nearby</h3>
+                            <div class="walkers-list">
+                                <div class="walker-card">
+                                    <div class="walker-avatar">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Maria" alt="Maria">
+                                        <span class="walker-status online"></span>
+                                    </div>
+                                    <div class="walker-info">
+                                        <h4>Maria C. <i class="fas fa-check-circle verified"></i></h4>
+                                        <div class="walker-stats">
+                                            <span><i class="fas fa-star"></i> 4.9</span>
+                                            <span><i class="fas fa-walking"></i> 124 walks</span>
+                                            <span><i class="fas fa-map-marker-alt"></i> 0.2 mi</span>
+                                        </div>
+                                    </div>
+                                    <button class="select-walker-btn">Select</button>
+                                </div>
+                                <div class="walker-card">
+                                    <div class="walker-avatar">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=David" alt="David">
+                                        <span class="walker-status online"></span>
+                                    </div>
+                                    <div class="walker-info">
+                                        <h4>David M. <i class="fas fa-check-circle verified"></i></h4>
+                                        <div class="walker-stats">
+                                            <span><i class="fas fa-star"></i> 4.8</span>
+                                            <span><i class="fas fa-walking"></i> 76 walks</span>
+                                            <span><i class="fas fa-map-marker-alt"></i> 0.3 mi</span>
+                                        </div>
+                                    </div>
+                                    <button class="select-walker-btn">Select</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Become Volunteer Section -->
+                    <div class="volunteer-section" id="volunteer-section">
+                        <div class="volunteer-benefits">
+                            <h3>Why Volunteer?</h3>
+                            <div class="benefits-grid">
+                                <div class="benefit-card">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    <h4>Help Others</h4>
+                                    <p>Make a real difference in campus safety</p>
+                                </div>
+                                <div class="benefit-card">
+                                    <i class="fas fa-award"></i>
+                                    <h4>Earn Badges</h4>
+                                    <p>Recognition for your contributions</p>
+                                </div>
+                                <div class="benefit-card">
+                                    <i class="fas fa-users"></i>
+                                    <h4>Community</h4>
+                                    <p>Join a network of caring individuals</p>
+                                </div>
+                                <div class="benefit-card">
+                                    <i class="fas fa-certificate"></i>
+                                    <h4>Certificate</h4>
+                                    <p>Get volunteer hours certification</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="volunteer-signup">
+                            <h3>Sign Up as Volunteer</h3>
+                            <form class="signup-form">
+                                <div class="form-group">
+                                    <label>Availability</label>
+                                    <div class="availability-grid">
+                                        <label class="day-check">
+                                            <input type="checkbox" checked>
+                                            <span>Mon</span>
+                                        </label>
+                                        <label class="day-check">
+                                            <input type="checkbox" checked>
+                                            <span>Tue</span>
+                                        </label>
+                                        <label class="day-check">
+                                            <input type="checkbox" checked>
+                                            <span>Wed</span>
+                                        </label>
+                                        <label class="day-check">
+                                            <input type="checkbox">
+                                            <span>Thu</span>
+                                        </label>
+                                        <label class="day-check">
+                                            <input type="checkbox" checked>
+                                            <span>Fri</span>
+                                        </label>
+                                        <label class="day-check">
+                                            <input type="checkbox">
+                                            <span>Sat</span>
+                                        </label>
+                                        <label class="day-check">
+                                            <input type="checkbox">
+                                            <span>Sun</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Preferred Hours</label>
+                                    <div class="hours-slider">
+                                        <span>6 PM</span>
+                                        <input type="range" min="18" max="24" value="22">
+                                        <span>12 AM</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" checked>
+                                        <span>I agree to the SafeWalk volunteer guidelines</span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="signup-btn">
+                                    <i class="fas fa-hands-helping"></i>
+                                    Join SafeWalk Team
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="volunteer-stats">
+                            <h3>Your Impact</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Walks Completed</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value">8.5</span>
+                                    <span class="stat-label">Miles Walked</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value">4.9</span>
+                                    <span class="stat-label">Rating</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-value">#23</span>
+                                    <span class="stat-label">Rank</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Page -->
+            <section class="page" id="page-report">
+                <div class="report-container">
+                    <div class="report-header">
+                        <h1>Report an <span class="gradient-text">Issue</span></h1>
+                        <p>Help keep the community safe</p>
+                    </div>
+
+                    <form class="report-form">
+                        <div class="report-types">
+                            <label class="report-type-option">
+                                <input type="radio" name="report-type" value="lighting" checked>
+                                <div class="type-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Poor Lighting</span>
+                                </div>
+                            </label>
+                            <label class="report-type-option">
+                                <input type="radio" name="report-type" value="unsafe">
+                                <div class="type-card">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>Unsafe Area</span>
+                                </div>
+                            </label>
+                            <label class="report-type-option">
+                                <input type="radio" name="report-type" value="obstruction">
+                                <div class="type-card">
+                                    <i class="fas fa-road"></i>
+                                    <span>Obstruction</span>
+                                </div>
+                            </label>
+                            <label class="report-type-option">
+                                <input type="radio" name="report-type" value="other">
+                                <div class="type-card">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Other</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                            <div class="location-input">
+                                <input type="text" placeholder="Enter location or use current">
+                                <button type="button" class="use-location-btn">
+                                    <i class="fas fa-crosshairs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-align-left"></i> Description</label>
+                            <textarea placeholder="Describe the issue..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-camera"></i> Add Photo (Optional)</label>
+                            <div class="photo-upload">
+                                <input type="file" id="photo-input" accept="image/*" hidden>
+                                <label for="photo-input" class="upload-area">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Tap to upload photo</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span>This is an emergency situation</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="submit-report-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Report
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Emergency Page -->
+            <section class="page" id="page-emergency">
+                <div class="emergency-container">
+                    <div class="emergency-header danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h1>Emergency</h1>
+                        <p>Get help immediately</p>
+                    </div>
+
+                    <button class="sos-button" onclick="triggerEmergency()">
+                        <div class="sos-pulse"></div>
+                        <div class="sos-inner">
+                            <i class="fas fa-exclamation"></i>
+                            <span>SOS</span>
+                        </div>
+                    </button>
+                    <p class="sos-hint">Press and hold for 3 seconds to alert emergency contacts</p>
+
+                    <div class="emergency-actions">
+                        <a href="tel:911" class="emergency-action-btn">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>Call 911</span>
+                        </a>
+                        <a href="tel:5551234567" class="emergency-action-btn campus">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Campus Security</span>
+                        </a>
+                    </div>
+
+                    <div class="emergency-contacts">
+                        <h3>Emergency Contacts</h3>
+                        <div class="contacts-list">
+                            <div class="contact-item">
+                                <div class="contact-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <h4>Mom</h4>
+                                    <p>(555) 123-4567</p>
+                                </div>
+                                <a href="tel:5551234567" class="call-btn">
+                                    <i class="fas fa-phone-alt"></i>
+                                </a>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <h4>Dad</h4>
+                                    <p>(555) 987-6543</p>
+                                </div>
+                                <a href="tel:5559876543" class="call-btn">
+                                    <i class="fas fa-phone-alt"></i>
+                                </a>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-avatar">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="contact-info">
+                                    <h4>Best Friend - Sarah</h4>
+                                    <p>(555) 456-7890</p>
+                                </div>
+                                <a href="tel:5554567890" class="call-btn">
+                                    <i class="fas fa-phone-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <button class="add-contact-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Emergency Contact
+                        </button>
+                    </div>
+
+                    <div class="safety-features">
+                        <h3>Quick Safety Features</h3>
+                        <div class="feature-toggles">
+                            <div class="feature-toggle">
+                                <div class="toggle-info">
+                                    <i class="fas fa-location-arrow"></i>
+                                    <span>Share Live Location</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="feature-toggle">
+                                <div class="toggle-info">
+                                    <i class="fas fa-microphone"></i>
+                                    <span>Voice Activation</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="feature-toggle">
+                                <div class="toggle-info">
+                                    <i class="fas fa-bell"></i>
+                                    <span>Fake Call Feature</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Page -->
+            <section class="page" id="page-profile">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-cover"></div>
+                        <div class="profile-info">
+                            <div class="profile-avatar-large">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=SafeUser" alt="Profile">
+                                <button class="edit-avatar-btn"><i class="fas fa-camera"></i></button>
+                            </div>
+                            <h2>Alex Johnson</h2>
+                            <p>@alexj • Member since Sep 2024</p>
+                            <div class="profile-badges">
+                                <span class="badge"><i class="fas fa-shield-alt"></i> Verified</span>
+                                <span class="badge"><i class="fas fa-hands-helping"></i> Volunteer</span>
+                                <span class="badge"><i class="fas fa-star"></i> Top Reporter</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats-card">
+                        <div class="stat">
+                            <span class="value">92</span>
+                            <span class="label">Safety Score</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">12</span>
+                            <span class="label">Walks</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">28</span>
+                            <span class="label">Reports</span>
+                        </div>
+                        <div class="stat">
+                            <span class="value">156</span>
+                            <span class="label">Trips</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Settings</h3>
+                        <div class="settings-list">
+                            <div class="settings-item">
+                                <i class="fas fa-user"></i>
+                                <span>Edit Profile</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-bell"></i>
+                                <span>Notifications</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-lock"></i>
+                                <span>Privacy & Security</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Location Settings</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-watch"></i>
+                                <span>Connected Devices</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-palette"></i>
+                                <span>Appearance</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help & Support</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                            <div class="settings-item">
+                                <i class="fas fa-info-circle"></i>
+                                <span>About SafeStep</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="logout-btn-profile">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sign Out
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" data-page="navigate">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Navigate</span>
+            </button>
+            <button class="nav-item sos-nav" onclick="triggerEmergency()">
+                <div class="sos-btn-wrapper">
+                    <i class="fas fa-exclamation"></i>
+                </div>
+                <span>SOS</span>
+            </button>
+            <button class="nav-item" data-page="community">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </button>
+            <button class="nav-item" data-page="chat">
+                <i class="fas fa-comments"></i>
+                <span>Chat</span>
+            </button>
+        </nav>
+
+        <!-- Notification Panel -->
+        <div class="notification-panel" id="notification-panel">
+            <div class="panel-header">
+                <h3>Notifications</h3>
+                <button class="mark-read-btn">Mark all read</button>
+            </div>
+            <div class="notification-list">
+                <div class="notification-item unread">
+                    <div class="notif-icon alert">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="notif-content">
+                        <p><strong>Safety Alert:</strong> Avoid Oak Street due to reported lighting issues</p>
+                        <span class="notif-time">5 min ago</span>
+                    </div>
+                </div>
+                <div class="notification-item unread">
+                    <div class="notif-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="notif-content">
+                        <p>Your report has been verified by 5 community members</p>
+                        <span class="notif-time">1 hour ago</span>
+                    </div>
+                </div>
+                <div class="notification-item unread">
+                    <div class="notif-icon info">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="notif-content">
+                        <p>Maria accepted your SafeWalk request</p>
+                        <span class="notif-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notif-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="notif-content">
+                        <p>You earned the "Night Owl" badge!</p>
+                        <span class="notif-time">1 day ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Modal -->
+        <div class="modal" id="emergency-modal">
+            <div class="modal-content emergency-modal">
+                <div class="emergency-countdown">
+                    <div class="countdown-circle">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" class="countdown-bg"/>
+                            <circle cx="50" cy="50" r="45" class="countdown-progress"/>
+                        </svg>
+                        <span class="countdown-number">5</span>
+                    </div>
+                    <h2>Sending SOS Alert</h2>
+                    <p>Your location will be shared with emergency contacts</p>
+                </div>
+                <button class="cancel-sos-btn" onclick="cancelEmergency()">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('SW registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
