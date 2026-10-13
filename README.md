@@ -6,7 +6,7 @@
 ![Mobile First](https://img.shields.io/badge/Mobile-First-FF6B9D)
 ![PWA Ready](https://img.shields.io/badge/PWA-Ready-00D9FF)
 
-> **Status: interactive front-end prototype.** This is a mobile-first PWA (HTML, CSS, vanilla JavaScript, service worker) that shows how the product would work: safety-scored routes, a walk-with-me buddy chat, SOS flow and safe-spot map. Route scores, chat replies and the SOS send are simulated in the browser; the data integrations listed below are the planned design, not live connections.
+> **Status: interactive front-end prototype.** This is a mobile-first PWA (HTML, CSS, vanilla JavaScript, service worker) that shows how the product would work: safety-scored route options, chat with walking buddies and volunteers, location sharing, a community feed and a hold-to-trigger SOS. Route scores, chat replies and the SOS send are simulated in the browser; the data integrations listed below are the planned design, not live connections.
 
 ## 🌟 Overview
 
