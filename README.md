@@ -6,11 +6,13 @@
 ![Mobile First](https://img.shields.io/badge/Mobile-First-FF6B9D)
 ![PWA Ready](https://img.shields.io/badge/PWA-Ready-00D9FF)
 
+> **Status: interactive front-end prototype.** This is a mobile-first PWA (HTML, CSS, vanilla JavaScript, service worker) that shows how the product would work: safety-scored routes, a walk-with-me buddy chat, SOS flow and safe-spot map. Route scores, chat replies and the SOS send are simulated in the browser; the data integrations listed below are the planned design, not live connections.
+
 ## 🌟 Overview
 
 SafeStep empowers pedestrians to walk confidently at night by delivering preventative, data-driven navigation that prioritizes safety over speed. Our platform combines multiple data sources to create the safest walking experience possible.
 
-## 🔗 Tech Integration
+## 🔗 Planned data integrations
 
 ```
 SafeStep = Google Maps API + City IoT Data + Crowdsourced Database + AI Engine + Campus Schedules + Emergency Services + Smartwatch APIs
